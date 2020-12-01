@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class ClienteService {
 
-  private urlEndpoint: string = 'http://localhost:8080/api/clientes';
-  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'})
+  private urlEndpoint: string = 'http://localhost:8087/api/clientes';
+  private httpHeaders = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'});
   constructor(private http: HttpClient, private router: Router) { }
 
   getClientes(): Observable<Cliente[]>{
