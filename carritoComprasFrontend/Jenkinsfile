@@ -7,11 +7,11 @@ pipeline {
         description: 'Repository Branch')
         
         string(name: 'URL_REPOSITORY',                           
-        defaultValue: 'https://github.com/J0hann48/integracion_continua_backend.git',
+        defaultValue: 'https://github.com/J0hann48/integracion_continua_frontend.git',
         description: 'Repository name')
         
         string(name: 'VERSION',
-        defaultValue: '1.0.0-SNAPSHOT',
+        defaultValue: '12.13.1',
         description: 'Product Version')
 
     }
@@ -20,10 +20,20 @@ pipeline {
          stage('Deploy frontend') {
                     steps {
                         script {
-                            sh("docker stop carrito-compras-frontend")                                       
+                            sh("docker stop carrito-compras-frontend")
+                            renameContainer(true)
                             sh("docker run --network network_name --name carrito-compras-frontend -p 80:80 j0h4nn/carrito-compras-frontend:12.13.1")
                         }                
                     }
                 }
     }
+}
+def renameContainer(def backup){
+    if(backup){
+        sh("docker rm carrito-compras-frontend-old")
+        sh("docker rename carrito-compras-frontend carrito-compras-frontend-old")
+    }else{
+        sh("docker rename carrito-compras-frontend-old carrito-compras-frontend")
+    }
+    
 }
