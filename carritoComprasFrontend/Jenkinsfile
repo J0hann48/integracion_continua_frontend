@@ -17,16 +17,13 @@ pipeline {
     }
 
     stages {
-        stage('Make workdir') {
-            steps {
-               script {                    
-                   sh("echo PRUEBA!")
-               		//BUILD_DIR="build_${BRANCH_NAME}_${currentBuild.number}"         
-                    //sh("mkdir ${BUILD_DIR}")                    
-                    sh("ls -R")
-                    /*downloadCode(BUILD_DIR, BRANCH_NAME, URL_REPOSITORY)*/
-                }                
-            }
-        }
+         stage('Deploy frontend') {
+                    steps {
+                        script {
+                            sh("docker stop carrito-compras-frontend")                                       
+                            sh("docker run --network network_name --name carrito-compras-frontend -p 80:80 j0h4nn/carrito-compras-frontend:latest")
+                        }                
+                    }
+                }
     }
 }
