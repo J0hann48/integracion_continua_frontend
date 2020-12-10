@@ -1,3 +1,32 @@
 pipeline {     
     agent any
+    parameters{        
+
+        string(name: 'BRANCH_NAME',                           
+        defaultValue: 'master',
+        description: 'Repository Branch')
+        
+        string(name: 'URL_REPOSITORY',                           
+        defaultValue: 'https://github.com/J0hann48/integracion_continua_backend.git',
+        description: 'Repository name')
+        
+        string(name: 'VERSION',
+        defaultValue: '1.0.0-SNAPSHOT',
+        description: 'Product Version')
+
+    }
+
+    stages {
+        stage('Make workdir') {
+            steps {
+               script {                    
+                   sh("echo PRUEBA!")
+               		//BUILD_DIR="build_${BRANCH_NAME}_${currentBuild.number}"         
+                    //sh("mkdir ${BUILD_DIR}")                    
+                    sh("ls -R")
+                    /*downloadCode(BUILD_DIR, BRANCH_NAME, URL_REPOSITORY)*/
+                }                
+            }
+        }
+    }
 }
