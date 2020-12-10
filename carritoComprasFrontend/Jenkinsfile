@@ -21,7 +21,7 @@ pipeline {
                     steps {
                         script {
                             sh("docker stop carrito-compras-frontend")                                       
-                            sh("docker run --network network_name --name carrito-compras-frontend -p 80:80 j0h4nn/carrito-compras-frontend:latest")
+                            sh("docker run --network network_name --name carrito-compras-frontend -p 80:80 j0h4nn/carrito-compras-frontend:12.13.1")
                         }                
                     }
                 }
